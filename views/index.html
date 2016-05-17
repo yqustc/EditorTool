@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>试卷试题编辑工具</title>
+    <!--样式引用-->
+    <link rel="stylesheet" href="../libs/Bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../libs/Bootstrap/css/bootstrap-spinner.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/tab.css">
+    <link rel="stylesheet" href="../styles/start.css">
+    <link rel="stylesheet" href="../styles/toolbar.css">
+    <link rel="stylesheet" href="../styles/outline.css">
+    <link rel="stylesheet" href="../styles/remark.css">
+    <link rel="stylesheet" href="../styles/editor.css">
+    <!--外部脚本引用-->
+    <script src="../libs/jQuery/jquery-1.11.1.js"></script>
+    <script src="../libs/jQuery/jquery.spinner.js"></script>
+    <script src="../libs/jQuery/async.js"></script>
+    <script src="../libs/jQuery/extension.js"></script>
+    <script src="../libs/Bootstrap/js/bootstrap.js"></script>
+    <script src="../libs/UEditor/ueditor.config.js"></script>
+    <script src="../libs/UEditor/ueditor.all.js"></script>
+    <script src="../libs/UEditor/lang/zh-cn/zh-cn.js"></script>
+    <!--内部脚本引用-->
+    <script src="../config.js"></script>
+    <script src="../modules/index.js"></script>
+    <script src="../modules/start.module.js"></script>
+    <script src="../modules/tab.module.js"></script>
+    <script src="../modules/toolbar.module.js"></script>
+    <script src="../modules/outline.module.js"></script>
+    <script src="../modules/editor.module.js"></script>
+    <script src="../modules/remark.module.js"></script>
+
+    <script src="../modules/qtimodule/qti/qti-v2.1-addin/qti.validator.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1-addin/qti.nw.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1-addin/qti.res.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1-addin/qti.media.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1-addin/qti.logger.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1-addin/qti.clock.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1-addin/qti.progressbar.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1-addin/qti.energybar.js"></script>
+
+    <script src="../modules/qtimodule/qti/qti-v2.1/qti.action.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1/qti.queue.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1/qti.actionFactory.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1/qti.segement.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1/qti.engine.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1/qti.analyzer.js"></script>
+    <script src="../modules/qtimodule/qti/qti-v2.1/qti.parser.js"></script>
+
+    <script src="../modules/qtimodule/specific/scripts/editor/qti.media.editor.js"></script>
+    <script src="../modules/qtimodule/specific/scripts/editor/qti.res.editor.js"></script>
+    <script src="../modules/qtimodule/specific/scripts/editor/qti.engine.editor.js"></script>
+    <script src="../modules/qtimodule/specific/scripts/editor/index.service.js"></script>
+    <script src="../modules/qtimodule/specific/scripts/editor/index.init.js"></script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <!--编辑器头部区域-->
+        <div class="nav-header">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="first-tab" data-target="file">
+                    <a href="#">
+                        文件
+                    </a>
+                </li>
+                <li role="presentation" class="active" data-target="start">
+                    <a href="#">
+                        开始
+                    </a>
+                </li>
+                <li role="presentation" data-target="insert">
+                    <a href="#">
+                        插入
+                    </a>
+                </li>
+                <li role="presentation" data-target="review">
+                    <a href="#">
+                        审阅
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--编辑器工具栏区域-->
+        <div class="toolbar" id="start" style="display: block;">
+            <div class="toolbar-body">
+                <div id="toolbar-operation" class="toolbar-btn-wrap">
+                    <div class="toolbar-btn-group">
+                        <div id="editor-toolbar"></div>
+                    </div>
+                    <div class="toolbar-bottom-title">操作</div>
+                </div>
+                <div id="toolbar-edit" class="toolbar-btn-wrap-last">
+                    <div class="toolbar-btn-group">
+                        <div id="whole-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/total.png"></div>
+                            <div class="toolbar-title">整题编辑</div>
+                        </div>
+                        <div id="item-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/item.png"></div>
+                            <div class="toolbar-title">题元编辑</div>
+                        </div>
+                        <div id="script-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/script.png"></div>
+                            <div class="toolbar-title">脚本编辑</div>
+                        </div>
+                    </div>
+                    <div class="toolbar-bottom-title">编辑</div>
+                </div>
+            </div>
+        </div>
+        <!--编辑器工具栏区域-->
+        <div class="toolbar" id="insert">
+            <div class="toolbar-body">
+                <div id="toolbar-resources" class="toolbar-btn-wrap">
+                    <div class="toolbar-btn-group">
+                        <div id="image-btn" class="toolbar-btn">
+                            <!--<div class="toolbar-icon"><img src="resources/images/Mimes_ooo_writer_24px_1187168_easyicon.net.png"></div>-->
+                            <div class="toolbar-icon"><img src="../resources/images/picture.png"></span></div>
+                            <div class="toolbar-title">图片</div>
+                        </div>
+                        <div id="audio-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/audio.png"></div>
+                            <div class="toolbar-title">音频</div>
+                        </div>
+                        <div id="video-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/vedio.png"></div>
+                            <div class="toolbar-title">视频</div>
+                        </div>
+                    </div>
+                    <div class="toolbar-bottom-title">素材</div>
+                </div>
+                <div id="toolbar-symbol" class="toolbar-btn-wrap">
+                    <div class="toolbar-btn-group">
+                        <div id="formula-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/formula.png"></div>
+                            <div class="toolbar-title">公式</div>
+                        </div>
+                        <div id="symbol-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/symbol.png"></div>
+                            <div class="toolbar-title">符号</div>
+                        </div>
+                    </div>
+                    <div class="toolbar-bottom-title">符号</div>
+                </div>
+                <div id="toolbar-itemstyle" class="toolbar-btn-wrap">
+                    <div class="toolbar-btn-group">
+                        <div id="choice-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/multipleChoice.png"></div>
+                            <div class="toolbar-title">选择题</div>
+                        </div>
+                        <div id="text-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/text.png"></div>
+                            <div class="toolbar-title">填空题</div>
+                        </div>
+                        <div id="judge-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/judge.png"></div>
+                            <div class="toolbar-title">判断题</div>
+                        </div>
+                        <div id="answer-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/answer.png"></div>
+                            <div class="toolbar-title">问答题</div>
+                        </div>
+                    </div>
+                    <div class="toolbar-bottom-title">题型样式</div>
+                </div>
+            </div>
+        </div >
+        <!--编辑器工具栏区域-->
+        <div class="toolbar" id="review">
+            <div class="toolbar-body">
+                <div id="toolbar-check" class="toolbar-btn-wrap">
+                    <div class="toolbar-btn-group">
+                        <div id="duplication-btn" class="toolbar-btn">
+                            <!--<div class="toolbar-icon"><img src="resources/images/Mimes_ooo_writer_24px_1187168_easyicon.net.png"></div>-->
+                            <div class="toolbar-icon"><img src="../resources/images/check.png"></div>
+                            <div class="toolbar-title">查重</div>
+                        </div>
+                        <div id="corrigendum-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/correct.png"></div>
+                            <div class="toolbar-title">勘误</div>
+                        </div>
+                    </div>
+                    <div class="toolbar-bottom-title">校对</div>
+                </div>
+                <div id="toolbar-remark" class="toolbar-btn-wrap">
+                    <div class="toolbar-btn-group">
+                        <div id="create-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/create.png"></div>
+                            <div class="toolbar-title">新建批注</div>
+                        </div>
+                        <div id="delete-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/delete.png"></div>
+                            <div class="toolbar-title">删除</div>
+                        </div>
+                        <div id="last-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/last.png"></div>
+                            <div class="toolbar-title">上一条</div>
+                        </div>
+                        <div id="next-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/next.png"></div>
+                            <div class="toolbar-title">下一条</div>
+                        </div>
+                    </div>
+                    <div class="toolbar-bottom-title">批注</div>
+                </div>
+                <div id="toolbar-review" class="toolbar-btn-wrap-last">
+                    <div class="toolbar-btn-group">
+                        <div id="proposition-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/proposition.png"></div>
+                            <div class="toolbar-title">命题预览</div>
+                        </div>
+                        <div id="test-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/test.png"></div>
+                            <div class="toolbar-title">机考预览</div>
+                        </div>
+                        <div id="paper-btn" class="toolbar-btn">
+                            <div class="toolbar-icon"><img src="../resources/images/paper.png"></div>
+                            <div class="toolbar-title">纸笔预览</div>
+                        </div>
+                    </div>
+                    <div class="toolbar-bottom-title">预览</div>
+                </div>
+            </div>
+        </div>
+        <!--编辑器主体区域-->
+        <div class="content">
+            <!--编辑器大纲区域-->
+            <div class="outline">
+                <div class="outline-title">目录结构</div>
+                <div class="outline-content"></div>
+            </div>
+            <!--编辑器编辑区域-->
+            <div class="editor">
+                <div class="editor-page">
+                    <script type="text/plain" id="editor" class="editor-main">
+                    <div class="paper-title">全国高中2015年统一期中考试</div>
+                    <div class="paper-title">数学试题</div>
+                    <div class="paper-prompt">(满分150分   考试时间120分钟)</div>
+                    <div class="assessment-testpart" id="part01">
+                        <div class="testpart-title"></div>
+                        <div class="testpart-body">
+                            <div class="assessment-section" id="section01">
+                                <div class="section-title">一、第一部分</div>
+                                <div class="section-header">
+                                    <div class="rubricBlock" data-view="candidate">
+                                        单项选择题（每小题只有一个正确选项，每小题2分，共40分）
+                                    </div>
+                                </div>
+                                <div class="section-body">
+                                    <div class="assessment-item" style="z-index:1000;" id="item01">
+                                        <div class="choiceInteraction vertical">
+                                            <div class="sequence">1.</div>
+                                            <div class="prompt editable" id="myeditor">
+                                                下列关于技术的应用说法正确的是：
+                                            </div>
+                                            <div class="simpleChoice">
+                                                <input type="radio" name="item01.RESPONSE" id="item01.RESPONSEA0" value="A" style="display: none;">
+                                                <label for="item01.RESPONSEA0"><span class="span">A、</span><span class="choiceContent editable" data-identifier="A">食品安全问题是社会问题，不涉及技术问题</span></label>
+                                            </div>
+                                            <div class="simpleChoice">
+                                                <input type="radio" name="item01.RESPONSE" id="item01.RESPONSEB1" value="B" style="display: none;">
+                                                <label for="item01.RESPONSEB1"><span class="span">B、</span><span class="choiceContent editable" data-identifier="B">法院审理案件有大量的技术工作要做</span></label>
+                                            </div>
+                                            <div class="simpleChoice">
+                                                <input type="radio" name="item01.RESPONSE" id="item01.RESPONSEC2" value="C" style="display: none;">
+                                                <label for="item01.RESPONSEC2"><span class="span">C、</span><span class="choiceContent editable" data-identifier="C">“嫦娥探月”是科学研究活动，与技术无关</span></label>
+                                            </div>
+                                            <div class="simpleChoice">
+                                                <input type="radio" name="item01.RESPONSE" id="item01.RESPONSED3" value="D" style="display: none;">
+                                                <label for="item01.RESPONSED3"><span class="span">D、</span><span class="choiceContent editable" data-identifier="D">提高学习成绩不需要技术</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="assessment-item" style="z-index:999;" id="item02">
+                                        <div class="choiceInteraction horizontal">
+                                            <div class="sequence">2.</div>
+                                            <div class="prompt editable">洗衣服并不像田园诗描绘的那样充满乐趣，手搓、棒击、冲刷、甩打…洗衣机的发明使人可以不再重复这些简单的体力劳动，体现了技术可以：</div>
+                                            <div class="simpleChoice">
+                                                <input type="radio" name="item02.RESPONSE" id="item02.RESPONSEA0" value="A" style="display: none;">
+                                                <label for="item02.RESPONSEA0"><span class="span">A、</span><span class="choiceContent editable" data-identifier="A">解放人</span></label>
+                                            </div>
+                                            <div class="simpleChoice">
+                                                <input type="radio" name="item02.RESPONSE" id="item02.RESPONSEB1" value="B" style="display: none;">
+                                                <label for="item02.RESPONSEB1"><span class="span">B、</span><span class="choiceContent editable" data-identifier="B">发展人</span></label>
+                                            </div>
+                                            <div class="simpleChoice">
+                                                <input type="radio" name="item02.RESPONSE" id="item02.RESPONSEC2" value="C" style="display: none;">
+                                                <label for="item02.RESPONSEC2"><span class="span">C、</span><span class="choiceContent editable" data-identifier="C">保护人</span></label>
+                                            </div>
+                                            <div class="simpleChoice">
+                                                <input type="radio" name="item02.RESPONSE" id="item02.RESPONSED3" value="D" style="display: none;">
+                                                <label for="item02.RESPONSED3"><span class="span">D、</span><span class="choiceContent editable" data-identifier="D">改造人</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="assessment-testpart" id="part02">
+                        <div class="testpart-title"></div>
+                        <div class="testpart-body">
+                            <div class="assessment-section" id="section02">
+                                <div class="section-title">二、第二部分</div>
+                                <div class="section-header">
+                                    <div class="rubricBlock" data-view="candidate">
+                                        <p style="text-indent: 2em; margin: 0;">填空题（每空2分，共4分）</p>
+                                    </div>
+                                </div>
+                                <div class="section-body">
+                                    <div class="assessment-item" style="z-index:1000;" id="item03">
+                                        <div class="sequence">3.</div>
+                                        <p class="editable">
+                                            将该电风扇各构件拆卸下来放在一起，它们( )（填“构成”或“不构成”）一个系统。
+                                        </p>
+                                    </div>
+                                    <div class="assessment-item" style="z-index:999;" id="item04">
+                                        <div class="sequence">4.</div>
+                                        <p class="editable">
+                                            组装完好的上述电风扇，电机轴与风叶之间的连接方式为( )（填“刚”或“铰”）连接。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="assessment-testpart" id="part03">
+                        <div class="testpart-title"></div>
+                        <div class="testpart-body">
+                            <div class="assessment-section" id="section03">
+                                <div class="section-title">三、第三部分</div>
+                                <div class="section-header">
+                                    <div class="rubricBlock" data-view="candidate">
+                                        <p style="text-indent: 2em; margin: 0;">简答题（每小题5分，共5分）</p>
+                                    </div>
+                                </div>
+                                <div class="section-body">
+                                    <div class="assessment-item" style="z-index:1000;" id="item05">
+                                        <div class="sequence">5.</div>
+                                        <p class="editable">春天是郊游的好季节，现需要你设计一款适合郊游使用的餐桌。基本设计要求：结构牢固、稳定；携带方便；单桌至少能供四名中学生同时就餐使用。</p>
+                                        <textarea id="item05_RESPONSE" rows="6" class="extendedTextEntryInteraction" name="item05.RESPONSE" onkeyup="checkLen(200,this.value)" value="" placeholder="请输入答案"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </script>
+                    <div class="remark">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--编辑器状态栏区域-->
+        <div class="footer"></div>
+        <!--开始区域-->
+        <div class="start">
+            <div class="g-bd1 f-cb">
+                <div class="g-sd1">
+                    <ul class="nav nav-pills nav-stacked nav-office-lm">
+                        <li><a title=""><i class="lm-icon lm-icon-save"></i>保存</a></li>
+                        <li><a title=""><i class="lm-icon lm-icon-osave"></i>另存为</a></li>
+                        <li id="openFile"><a title=""><i class="lm-icon lm-icon-open"></i>打开</a></li>
+                        <li><a title=""><i class="lm-icon lm-icon-close"></i>关闭</a></li>
+                        <li><a title="">信息</a></li>
+                        <li><a title="">最近所使用文件</a></li>
+                        <li class="active"><a href="" title="">新建</a></li>
+                        <li><a title="">打印</a></li>
+                        <li><a title=""><i class="lm-icon lm-icon-exit"></i>退出</a></li>
+                    </ul>
+                </div>
+                <div class="g-mn1">
+                    <div class="g-mn1c">
+                        <div class="tpl-row">
+                            <div id="create-paper" class="tpl-col text-center">
+                                <p class="tpl-icon tpl-icon-paper"><i class="tpl-icon-paper"></i></p>
+                                <p class="text-center create-title">试卷</p>
+                            </div>
+                            <div id="create-item" class="tpl-col text-center">
+                                <p class="tpl-icon tpl-icon-paperitem"><i class="tpl-icon-paperitem"></i></p>
+                                <p class="text-center create-title">试题</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="file" id="openFileDialog" style="display:none;" accept=".xml">
+                <input type="file" id="openFolderDialog" style="display:none;" nwdirectory>
+                <input type="file" id="saveFileDialog" style="display:none;" nwsaveas>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="item-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center">操作</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" onsubmit="return false;">
+                        <div class="form-group" style="display: none;">
+                            <label class="col-sm-2 control-label">当前题型</label>
+                            <div class="col-sm-10">
+                                <input type="hidden" class="form-control" id="item-type">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择题型</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="choice-type">
+                                    <option value="single">单选题</option>
+                                    <option value="multiple">多选题</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选项个数</label>
+                            <div class="col-sm-10">
+                                <div class="input-group spinner" data-trigger="spinner">
+                                    <input type="text" id="choice-num" class="form-control" value="4" data-rule="quantity">
+                                    <span class="input-group-addon">
+                                        <a href="javascript:;" class="spin-up" data-spin="up"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a>
+                                        <a href="javascript:;" class="spin-down" data-spin="down"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排列方式</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="choice-orientation">
+                                    <option value="horizontal">水平排列</option>
+                                    <option value="vertical">垂直排列</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">插入位置</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="insert-position">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="confirm-btn">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="createPaper-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center">请选择试卷模板</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" onsubmit="return false;">
+                        <div class="form-group" style="margin-top: 15px;">
+                            <div class="input-group col-md-10 col-md-offset-1">
+                                <input type="text" class="form-control" id="paperPath" >
+                                <div class="input-group-addon" id="select-btn" style="cursor: pointer;">请选择</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="createPaper-btn">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+    <div class="modal fade" id="createItem-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center">请选择题型</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" onsubmit="return false;">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择题型</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="createItem-type">
+                                    <option value="single">单选题</option>
+                                    <option value="multiple">多选题</option>
+                                    <option value="textEntry">填空题</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group choice-param">
+                            <label class="col-sm-2 control-label">选项个数</label>
+                            <div class="col-sm-10">
+                                <div class="input-group spinner" data-trigger="spinner">
+                                    <input type="text" id="createChoice-num" class="form-control" value="4" data-rule="quantity">
+                                    <span class="input-group-addon">
+                                        <a href="javascript:;" class="spin-up" data-spin="up"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a>
+                                        <a href="javascript:;" class="spin-down" data-spin="down"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group choice-param">
+                            <label class="col-sm-2 control-label">排列方式</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="createChoice-orientation">
+                                    <option value="horizontal">水平排列</option>
+                                    <option value="vertical">垂直排列</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="createItem-btn">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</body>
+</html>

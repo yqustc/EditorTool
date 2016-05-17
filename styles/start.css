@@ -1,0 +1,77 @@
+.g-bd1{
+    margin: 0px;
+    height: 100%;
+}
+.g-sd1{
+    position: relative;
+    float: left;
+    width: 190px;
+    margin-right: -190px;
+    height: 100%;
+    border-right: 2px solid #E6E6E8;
+    background: -webkit-linear-gradient(#FCFDFF,#EDEDF2);
+}
+.g-mn1{
+    float: right;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+}
+.g-mn1c{
+    margin-left: 200px;
+}
+.tpl-row{
+    padding: 15px;
+}
+.tpl-icon{
+    width: 137px;
+    height: 100px;
+    margin: 0;
+}
+.tpl-icon-paper{
+    background: url(../resources/images/tmp_icon_paper.png) center center no-repeat;
+}
+.tpl-icon-paperitem{
+    background: url(../resources/images/tmp_icon_paperitem.png) center  center no-repeat;
+}
+.tpl-col{
+    width: 137px;
+    min-height: 110px;
+    float: left;
+    cursor: pointer;
+}
+.tpl-col:hover{
+    background: -webkit-linear-gradient(#FEE48D,#FFF6D7);
+    border: 1px solid #E7D795;
+}
+.lm-icon{width:16px;height:16px;display: inline-block;margin-right: 5px;vertical-align:middle;}
+.lm-icon-save{background: url(../resources/images/lm_icon_save.jpg) center center no-repeat;}
+.lm-icon-osave{background: url(../resources/images/lm_icon_osave.jpg) center center no-repeat;}
+.lm-icon-open{background: url(../resources/images/lm_icon_open.jpg) center center no-repeat;}
+.lm-icon-close{background: url(../resources/images/lm_icon_close.jpg) center center no-repeat;}
+.lm-icon-exit{background: url(../resources/images/lm_icon_exit.jpg) center center no-repeat;}
+.nav-office-lm{}
+.nav-office-lm .active a{
+    background: -webkit-linear-gradient(left, #0C51B0,#206ACC , #5B9FF5,#206ACC,#0C51B0);
+}
+.nav-office-lm .active a::after{
+    position: absolute;
+    right: 0;
+    top: 10px;
+    content: '';
+    width: 0;
+    border-right: solid 15px #FCFDF9;
+    border-top: solid 10px rgba(0,0,0,0);
+    border-bottom: solid 10px rgba(0,0,0,0);
+}
+.nav-office-lm a {
+    border-radius: 0 !important;
+    color: #333;
+    font-weight: bold;
+}
+.nav-office-lm li:hover{
+    cursor: pointer;
+}
+.create-title{
+    font-weight: bold;
+}

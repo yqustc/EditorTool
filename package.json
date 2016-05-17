@@ -1,0 +1,19 @@
+{
+	"name": "Editor",
+	"main": "./EditorTool/index.html",
+	"window": {
+        "position": "center",
+        "width": 1024,
+        "height": 768,
+		"toolbar": false,
+		"frame": false,
+		"fullscreen": false,
+        "resizable": true,
+        "kiosk": false,
+        "always-on-top": false,
+        "min_width": 1024
+	},
+    "webkit":{
+        "plugin":true
+    }
+}

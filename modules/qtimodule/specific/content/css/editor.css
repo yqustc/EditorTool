@@ -1,0 +1,127 @@
+﻿.height-per-100{
+    height: 100%;
+}
+.width-per-100{
+    width: 100%;
+}
+
+.nav-tab{
+    min-width: 120px;
+}
+.nav-tabs>li>a{
+    text-align: center;
+    color: #555;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+    color: #09455D;
+    font-size: 15px;
+    font-weight: bold;
+}
+#qti_xml_to_html{
+    display: none;
+}
+.layout-center{
+    display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    height: 100%;
+}
+
+/*试题展示部分*/
+.assessment-section .title{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.assessment-section .header{
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.assessment-item{
+    clear: both;
+}
+.assessment-item blockquote{
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    border: 0;
+}
+.assessment-item .sequence{
+    float: left;
+    width: 26px;
+}
+.assessment-item .prompt{
+    margin: 10px auto;
+}
+.assessment-item textarea{
+    width: 60%;
+}
+.assessment-item input[type=radio], .assessment-item input[type=checkbox]{
+    margin-right: 13px;
+}
+.assessment-item input[type=text]{
+    border: 1px #888888 solid;
+}
+.assessment-item label{
+    font-weight: normal;
+}
+.choiceInteraction>img, .choiceInteraction>object{
+    display: block;
+}
+.assessment-item .horizontal{
+    float: left;
+    margin-right: 40px;
+}
+.assessment-item .uploadInteraction .input-group{
+    width: 35%;
+}
+.oralInteraction{
+    margin-top: 20px;
+}
+
+/*遮罩层*/
+.mask{
+    z-index: 20000;
+    background-color: #ffffff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+/*录放音提示*/
+.oralInteraction{
+    position: fixed;
+    width: 100%;
+    bottom: 60px;
+}
+.oralInteraction .clue{
+    width: 12%;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3071a9;
+    float: left;
+}
+.oralInteraction .progressBar{
+    width: 68%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    float: left;
+}
+.oralInteraction .energyBar{
+    width: 20%;
+    padding-left: 5%;
+    float: left;
+    text-align: center;
+}
+
+/*录放音按钮*/
+.record-btn-group{
+    display: none;
+}
+.record-again{
+    margin-left: 30px;
+}

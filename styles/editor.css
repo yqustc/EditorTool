@@ -1,0 +1,16 @@
+.editor-page{
+    border: 1px solid #c8c9cc;
+    width: 660px;
+    height: 1100px;
+    background-color: #fff;
+    margin: 10px auto;
+}
+.editor-main{
+    width: 620px;
+    margin: 20px;
+    float: left;
+}
+
+.editor-main #edui1{
+    border: 0;
+}

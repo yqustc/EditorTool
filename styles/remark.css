@@ -1,0 +1,10 @@
+.remark-input{
+    border: #ff0000 1px solid;
+    background-color: rgb(255, 168, 168);
+    border-radius: 4px;
+    width: 90px;
+    min-height: 70px;
+    position: absolute;
+    left: 4px;
+    overflow-y: hidden;
+}

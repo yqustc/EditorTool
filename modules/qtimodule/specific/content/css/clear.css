@@ -1,0 +1,35 @@
+﻿/* CSS Document */
+*{ margin:0px; padding:0px;}
+body,div,input,h1,dl,dt,dd,ul,li,strong,input,select,option,table,th,td,tbody,tr,textarea{ margin:0px; padding:0px;}
+body{ font-family:'Microsoft YaHei';color:#000;}
+a{ text-decoration:none;}
+img{ border:0px;}
+input{ border:0px;}
+.clear{ clear:both;}
+.blue{ color:#3d6db7;}
+.blblue{ color:#0000FF;}
+.cheng{ color:#e3852a;}
+.org{ color:#f50;}
+.green{ color:#019a01;}
+.left{ float:left;}
+.right{ float:right;}
+.ml5{ margin-left:5px;}
+.mat{ margin-top:15px;}
+.mab{ margin-bottom:29px;}
+.mab2{ margin-bottom:20px;}
+.red{ color:#f00;}
+.padding-td10
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.center
+{
+    text-align: center;
+}
+
+html, body {
+    height: 100%;
+    font-family:'Microsoft YaHei';
+}

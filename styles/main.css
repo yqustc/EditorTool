@@ -1,0 +1,205 @@
+html, body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Microsoft Yahei';
+    -webkit-user-select: none;
+    background: transparent;
+}
+/*外层边框样式*/
+.main-container{
+    width: 100%;
+    height: 100%;
+    border-image-source: url("../resources/images/border.png");
+    border-image-width: 66px 10px 10px 10px;
+    border-image-slice: 60 10 10 10;
+    border-image-repeat: stretch;
+    margin: 0;
+    padding: 0;
+}
+.container-heading{
+    border: 0;
+    padding: 0;
+    height: 30px;
+    -webkit-app-region: drag;
+}
+.container-title{
+    height: 28px;
+    line-height: 28px;
+    font-size: 13px;
+    text-shadow: 0px 0px 8px #ffffff;
+}
+.frame-btn-group{
+    -webkit-app-region: no-drag;
+    float: right;
+    margin-top: -28px;
+    margin-right: 6px;
+}
+.frame-btn{
+    cursor:pointer;
+    float: left;
+}
+#minisizeBtn{
+    width: 32px;
+    height: 20px;
+    background: url("../resources/images/min_normal.png");
+}
+#reductionBtn{
+    width: 28px;
+    height: 20px;
+    background: url("../resources/images/reduction_normal.png");
+    display: none;
+}
+#maxsizeBtn{
+    width: 28px;
+    height: 20px;
+    background: url("../resources/images/max_normal.png");
+}
+#closeBtn{
+    width: 37px;
+    height: 20px;
+    background: url("../resources/images/close_normal.png");
+}
+#minisizeBtn:hover{
+    background: url("../resources/images/min_hover.png");
+}
+#reductionBtn:hover {
+    background: url("../resources/images/reduction_hover.png");
+}
+#maxsizeBtn:hover{
+    background: url("../resources/images/max_hover.png");
+}
+#closeBtn:hover{
+    background: url("../resources/images/close_hover.png");
+}
+#minisizeBtn:visited{
+    background: url("../resources/images/min_press.png");
+}
+#reductionBtn:visited{
+    background: url("../resources/images/reduction_press.png");
+}
+#maxsizeBtn:visited{
+    background: url("../resources/images/max_press.png");
+}
+#closeBtn:visited{
+    background: url("../resources/images/close_press.png");
+}
+.shortcut-btn-group{
+    float: left;
+    margin-top: -20px;
+    margin-left: 12px;
+}
+.shortcut-btn{
+    width: 14px;
+    height: 14px;
+    margin-left: 12px;
+}
+#saveBtn{
+    background: url("../resources/images/save.png") no-repeat;
+}
+#undoBtn{
+    background: url("../resources/images/undo.png") no-repeat;
+}
+#redoBtn{
+    background: url("../resources/images/redo.png") no-repeat;
+}
+.divider-line{
+    width: 3px;
+    height: 14px;
+    margin-left: 12px;
+    float: left;
+    background: url("../resources/images/divide.png");
+}
+.container-body{
+    position: relative;
+    padding: 0;
+    margin: 0 0 0 6px;
+    width: calc(100% - 12px);
+    height: calc(100% - 36px);
+}
+/*内层页面样式*/
+.wrapper{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.nav-header{
+    width: 100%;
+    height: 32px;
+    z-index: 1000;
+}
+.toolbar{
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #e3e4e6;
+    z-index: 1000;
+    display: none;
+}
+.content{
+    width: 100%;
+    height: calc(100% - 132px);
+    background-color: #e8e9eb;
+    position: relative;
+}
+.outline{
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+    float: left;
+    overflow: auto;
+}
+.editor{
+    text-align: left;
+    width: calc(100% - 200px);
+    height: 100%;
+    float: left;
+    overflow: auto;
+}
+.remark{
+    width: 98px;
+    height: 100%;
+    float: left;
+    border-left: 1px solid #c8c9cc;
+    text-align: center;
+    position: relative;
+    display: none;
+}
+.footer{
+    width: 100%;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #c8c9cc;
+    z-index: 1000;
+}
+canvas{
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    background-color: transparent;
+    border: 0;
+    z-index: 1001;
+}
+.start{
+    width: 100%;
+    height: calc(100% - 32px);
+    position: absolute;
+    left: 0;
+    top: 32px;
+    z-index: 1000;
+    display: none;
+}
+/* 模态框 */
+.modal{
+    margin-top: 100px;
+}
+.modal-header{
+    background-color: #337ab7;
+    color: #fff;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.modal-header .close{
+    color: #fff;
+    opacity: .8;
+}

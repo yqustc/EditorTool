@@ -1,0 +1,14 @@
+.nav-tabs > li.first-tab > a, .nav-tabs > li.first-tab > a:hover, .nav-tabs > li.first-tab > a:focus{
+    border-color: rgb(61, 105, 184);
+    color: #fff;
+    background: -webkit-linear-gradient(#0C51B0, #206ACC, #5B9FF5);
+}
+.nav-tabs > li > a:hover{
+    background-color: #fff;
+}
+.nav-tabs > li > a{
+    color: #363636;
+    padding: 5px 15px;
+    font-size: 13px;
+    margin-right: 6px;
+}
