@@ -1,0 +1,100 @@
+/*可以在这里添加你自己的css*/
+body{
+    font-family: 'Microsoft Yahei';
+    -webkit-user-select: none;
+    font-size: 14px;
+}
+/*试卷样式部分*/
+.paper-title{
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+}
+.paper-prompt{
+    text-align: center;
+    font-size: 15px;
+    line-height: 30px;
+}
+.assessment-testpart{
+    clear: both;
+}
+.assessment-section .section-title{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+}
+.assessment-section .section-header{
+    font-size: 15px;
+    line-height: 30px;
+    text-indent: 2em;
+}
+.assessment-item{
+    border: 1px #aaaaaa solid;
+    padding: 8px;
+    margin: 8px;
+}
+.assessment-item .prompt{
+    line-height: 25px;
+    min-height: 25px;
+    margin-bottom: 5px;
+    margin-left: 25px;
+}
+.assessment-item .sequence{
+    float: left;
+    line-height: 25px;
+    width: 24px;
+}
+.assessment-item p{
+    line-height: 25px;
+    min-height: 25px;
+    margin: 0 0 0 25px;
+}
+.assessment-item input[type=text]{
+    height: 20px;
+}
+.assessment-item .simpleChoice{
+    line-height: 25px;
+    margin: 5px 0;
+}
+.assessment-item .simpleChoice label{
+    font-weight: normal;
+    display: block;
+    line-height: 25px;
+    min-height: 25px;
+}
+.assessment-item .simpleChoice label .span{
+    display: block;
+    float: left;
+    width: 25px;
+    line-height: 25px;
+    min-height: 25px;
+}
+.assessment-item .simpleChoice label .choiceContent{
+    display: block;
+    margin-left: 25px;
+    line-height: 25px;
+    min-height: 25px;
+}
+.assessment-item .horizontal{
+    overflow: hidden;
+}
+.assessment-item .horizontal .simpleChoice{
+    float: left;
+    min-width: 25%;
+}
+.assessment-item textarea{
+    margin: 8px 0 0 25px;
+    width: calc(100% - 31px);
+}
+.remark-item{
+    border-color: #ff0000;
+}
+.editable{
+    -webkit-user-select: initial;
+    border: 1px #aaaaaa solid;
+    padding: 0 10px;
+}
+#qti_xml_to_html{
+    display: none;
+}
